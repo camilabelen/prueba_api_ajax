@@ -1,5 +1,5 @@
 $(document).ready(function () {
-   $.getJSON('http://www.omdbapi.com/?t=Harry+Potter+and+the+Chamber+of+Secrets&apikey=276881c0').then(function(paste) {
+   $.getJSON('http://www.omdbapi.com/?t=Harry+Potter+and+the+Chamber+of+Secrets&apikey=276881c0').then(function movieInfo(paste) {
     var poster= $('#poster');
     var datos= $('#datos');
 
@@ -41,22 +41,41 @@ function renderMovies (response) {
 
     console.log([title, imdbID, poster]);
 
-    var moviesList = $('<li class="list-group-item"></li>');
+    var moviesList = $('<li class="list-group-item result"></li>');
     var moviePoster = $('<img src="' + poster + '"width=50px"/>');
     moviesList.append(moviePoster);
     moviesList.append(title);
     resultsUl.append(moviesList);
-
-    moviesList.click(renderDetails);
+    //funcion para mostrar id de cada elemento
+    moviesList.click(function (){
+      console.log([title, imdbID]);
+    });
   }
+
 }
 
 function renderError (error) {
   console.log(error);
 }
 
+/*
 function renderDetails () {
-  console.log('details');
+
+  $('.result').click(function (response) {
+    var movies = response.Search;
+    var resultsUl = $('#results');
+    resultsUl.empty();
+    for (var m in movies) {
+      var movie = movies[m];
+      var title = movie.Title;
+      var imdbID = movie.imdbID;
+      var poster = movie.Poster;
+    }   
+    //sacar id del elemento al que se le haga click
+    var urlMovie = 'http://www.omdbapi.com/?i=' + imdbID + '&apikey=276881c0';
+  })  
+  console.log(urlMovie);
 }
+*/
 
  

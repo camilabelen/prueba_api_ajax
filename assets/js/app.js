@@ -44,13 +44,17 @@ function renderMovies (response) {
     var moviesList = $('<li class="list-group-item result"></li>');
     var moviePoster = $('<img src="' + poster + '"width=50px"/>');
     moviesList.append(moviePoster);
-    moviesList.append(title);
+    moviesList.append('<span>' + title + '</span>');
     resultsUl.append(moviesList);
     //funcion para mostrar id de cada elemento
-    moviesList.click(function (){
-      console.log([title, imdbID]);
-    });
+    
   }
+
+  $('.result').click(function () {
+      var x = $(this).text();
+      var strToArr = x.replace(" ", "+");
+      console.log(strToArr);
+  });
 
 }
 
